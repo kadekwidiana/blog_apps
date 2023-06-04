@@ -13,6 +13,7 @@ class Post {
   String title;
   String category;
   String image;
+  String rating;
   String description;
   // DateTime createdAt;
   // DateTime updatedAt;
@@ -22,6 +23,7 @@ class Post {
     required this.title,
     required this.category,
     required this.image,
+    required this.rating,
     required this.description,
     // required this.createdAt,
     // required this.updatedAt,
@@ -32,6 +34,7 @@ class Post {
         title: json["title"],
         category: json["category"],
         image: json["image"],
+        rating: json["rating"],
         description: json["description"],
         // createdAt: DateTime.parse(json["created_at"]),
         // updatedAt: DateTime.parse(json["updated_at"]),
@@ -42,6 +45,7 @@ class Post {
         "title": title,
         "category": category,
         "image": image,
+        "rating": rating,
         "description": description,
         // "created_at": createdAt.toIso8601String(),
         // "updated_at": updatedAt.toIso8601String(),

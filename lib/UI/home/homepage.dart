@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_uts/UI/data_post/posts.dart';
 import 'package:project_uts/UI/login/login.dart';
 import 'package:project_uts/models/post.dart';
 import 'package:project_uts/UI/profil/profilpage.dart';
@@ -120,6 +121,16 @@ class _HomePageState extends State<HomePage> {
                           builder: (context) => const ProfilPage()));
                 },
               ),
+              ListTile(
+                title: const Text('Data Post'),
+                leading: const Icon(Icons.post_add),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const DataPosts()));
+                },
+              ),
               const Divider(),
               ListTile(
                 title: const Text('Log-Out'),
@@ -201,11 +212,19 @@ class PostDetailPage extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.only(right: 16, left: 16, bottom: 5),
               child: Text(
                 post.title,
                 style:
                     const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 16, left: 16, bottom: 5),
+              child: Text(
+                '⭐ ' + post.rating,
+                style:
+                    const TextStyle(fontSize: 12, fontWeight: FontWeight.bold),
               ),
             ),
             Padding(
