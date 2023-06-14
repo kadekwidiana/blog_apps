@@ -7,7 +7,7 @@ import '../models/errMsg.dart';
 class ApiStatic {
   // static const host = 'http://192.168.0.135';
   static const host = 'http://192.168.43.195';
-  static const _token = "Bearer 1|VpKj3VkrEh0gDgcVubqWMEjaxZZRM3Lpt2m19OEm";
+  static const _token = "Bearer 2|9ZFbM6GoyKMU29P2W9uINrpwOm2zSrFwpSTriFVi";
   static Future<List<Post>> getPost() async {
     try {
       final response = await http.get(Uri.parse("$host/api/posts"), headers: {
@@ -35,6 +35,8 @@ class ApiStatic {
       var request = http.MultipartRequest('POST', url);
       request.fields['title'] = post['title'];
       request.fields['category'] = post['category'];
+      request.fields['location'] = post['location'];
+      request.fields['jam_buka'] = post['jam_buka'];
       request.fields['rating'] = post['rating'];
       request.fields['description'] = post['description'];
       if (filepath != '') {

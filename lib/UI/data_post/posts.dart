@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:project_uts/UI/data_post/inputPost.dart';
+import 'package:project_uts/UI/detail/detailPost.dart';
 import 'package:project_uts/UI/home/homepage.dart';
 import 'package:project_uts/models/errMsg.dart';
 import 'package:project_uts/models/post.dart';
@@ -63,7 +64,7 @@ class _DataPostsState extends State<DataPosts> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => PostDetailPage(post: post),
+        builder: (context) => DetailPost(post: post),
       ),
     );
   }
@@ -86,6 +87,8 @@ class _DataPostsState extends State<DataPosts> {
                             title: '',
                             category: '',
                             image: '',
+                            location: '',
+                            jam_buka: '',
                             rating: '',
                             description: ''))));
           }),

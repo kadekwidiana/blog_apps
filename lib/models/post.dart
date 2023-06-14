@@ -13,6 +13,8 @@ class Post {
   String title;
   String category;
   String image;
+  String location;
+  String jam_buka;
   String rating;
   String description;
   // DateTime createdAt;
@@ -23,6 +25,8 @@ class Post {
     required this.title,
     required this.category,
     required this.image,
+    required this.location,
+    required this.jam_buka,
     required this.rating,
     required this.description,
     // required this.createdAt,
@@ -34,6 +38,8 @@ class Post {
         title: json["title"],
         category: json["category"],
         image: json["image"],
+        location: json["location"],
+        jam_buka: json["jam_buka"],
         rating: json["rating"],
         description: json["description"],
         // createdAt: DateTime.parse(json["created_at"]),
@@ -45,6 +51,8 @@ class Post {
         "title": title,
         "category": category,
         "image": image,
+        "location": location,
+        "jam_buka": jam_buka,
         "rating": rating,
         "description": description,
         // "created_at": createdAt.toIso8601String(),

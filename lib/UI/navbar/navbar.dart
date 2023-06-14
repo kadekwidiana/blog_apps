@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
+import 'package:project_uts/UI/home/homePage2.dart';
 
 import '../about/aboutpage.dart';
 import '../home/homepage.dart';
@@ -17,6 +18,7 @@ class _MyNavbarState extends State<MyNavbar> {
 
   final List<Widget> _pages = [
     const HomePage(),
+    const HomePage2(),
     const AboutPage(),
     const ProfilPage(),
   ];
@@ -46,6 +48,10 @@ class _MyNavbarState extends State<MyNavbar> {
               GButton(
                 icon: Icons.home,
                 text: 'Home',
+              ),
+              GButton(
+                icon: Icons.favorite,
+                text: 'Favorit',
               ),
               GButton(
                 icon: Icons.web_asset,

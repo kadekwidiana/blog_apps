@@ -19,7 +19,14 @@ class InputPost extends StatefulWidget {
 
 class _InputPostState extends State<InputPost> {
   final _formkey = GlobalKey<FormState>();
-  late TextEditingController title, category, image, rating, description;
+  late TextEditingController title,
+      // category,
+      location,
+      jam_buka,
+      image,
+      rating,
+      description;
+
   late int id = 0;
   bool _isupdate = false;
   bool _validate = false;
@@ -28,22 +35,32 @@ class _InputPostState extends State<InputPost> {
   late String _imagePath = '';
   late String _imageURL = '';
   final ImagePicker _picker = ImagePicker();
+  List<String> categories = ['Tubruk', 'Arabika', 'Robusta', 'Late'];
+  late String? selectedCategory;
   @override
   void initState() {
     title = TextEditingController();
-    category = TextEditingController();
+    // category = TextEditingController();
+    location = TextEditingController();
+    jam_buka = TextEditingController();
     // image = TextEditingController();
     rating = TextEditingController();
     description = TextEditingController();
+    selectedCategory = null;
+    // selectedCategory = widget.post.category;
     if (widget.post.id != 0) {
       id = widget.post.id;
       title = TextEditingController(text: widget.post.title);
-      category = TextEditingController(text: widget.post.category);
+      // category = TextEditingController(text: widget.post.category);
+      location = TextEditingController(text: widget.post.location);
+      jam_buka = TextEditingController(text: widget.post.jam_buka);
       rating = TextEditingController(text: widget.post.rating);
       description = TextEditingController(text: widget.post.description);
       _isupdate = true;
       _imageURL = ApiStatic.host + '/storage/' + widget.post.image;
+      selectedCategory = widget.post.category;
     }
+
     super.initState();
   }
 
@@ -53,7 +70,9 @@ class _InputPostState extends State<InputPost> {
       _formkey.currentState!.save();
       var params = {
         'title': title.text.toString(),
-        'category': category.text.toString(),
+        'category': selectedCategory,
+        'location': location.text.toString(),
+        'jam_buka': jam_buka.text.toString(),
         'rating': rating.text.toString(),
         'description': description.text.toString(),
       };
@@ -66,7 +85,7 @@ class _InputPostState extends State<InputPost> {
       if (_success) {
         Navigator.of(context).pushReplacement(new MaterialPageRoute(
             builder: (BuildContext context) => DataPosts()));
-      }
+      } else {}
     } else {
       _validate = true;
     }
@@ -101,26 +120,53 @@ class _InputPostState extends State<InputPost> {
                 ),
                 Padding(
                   padding: const EdgeInsets.all(5),
+                  child: DropdownButtonFormField<String>(
+                    value: selectedCategory,
+                    onChanged: (newValue) {
+                      setState(() {
+                        selectedCategory = newValue;
+                      });
+                    },
+                    validator: (value) {
+                      if (value == null) {
+                        return 'Wajib pilih kategori';
+                      }
+                      return null;
+                    },
+                    items: categories.map((category) {
+                      return DropdownMenuItem(
+                        value: category,
+                        child: Text(category),
+                      );
+                    }).toList(),
+                    decoration: const InputDecoration(
+                      hintText: 'Pilih kategori',
+                      labelText: 'Kategori',
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
                   child: TextFormField(
-                    controller: category,
+                    controller: location,
                     validator: (u) => u == "" ? "Wajib isi" : null,
                     decoration: const InputDecoration(
                         // icon: Icon(Icons.title),
-                        hintText: "Category",
-                        labelText: "Category"),
+                        hintText: "Lokasi",
+                        labelText: "Lokasi"),
                   ),
                 ),
-                // Padding(
-                //   padding: const EdgeInsets.all(5),
-                //   child: TextFormField(
-                //     controller: image,
-                //     validator: (u) => u == "" ? "Wajib isi" : null,
-                //     decoration: const InputDecoration(
-                //         // icon: Icon(Icons.title),
-                //         hintText: "Image",
-                //         labelText: "Image"),
-                //   ),
-                // ),
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: TextFormField(
+                    controller: jam_buka,
+                    validator: (u) => u == "" ? "Wajib isi" : null,
+                    decoration: const InputDecoration(
+                        // icon: Icon(Icons.title),
+                        hintText: "Jam Buka",
+                        labelText: "Jam Buka"),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.all(5),
                   child: TextFormField(
@@ -134,7 +180,7 @@ class _InputPostState extends State<InputPost> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(bottom: 10, left: 10),
+                  padding: EdgeInsets.only(bottom: 10, left: 0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -183,17 +229,23 @@ class _InputPostState extends State<InputPost> {
                                         child: Row(
                                           children: <Widget>[
                                             Padding(
-                                              padding:
-                                                  EdgeInsets.only(left: 25),
+                                              padding: EdgeInsets.only(left: 5),
                                             ),
-                                            Text("Ambil Gambar")
+                                            Text(
+                                              " Pilih Gambar .",
+                                              style: TextStyle(
+                                                  // color: Colors.white,
+                                                  backgroundColor: Colors.grey,
+                                                  fontSize: 15,
+                                                  fontWeight: FontWeight.bold),
+                                            )
                                           ],
                                         ),
                                         decoration: BoxDecoration(
                                             border: Border(
                                                 bottom: BorderSide(
-                                                    color: Colors.greenAccent,
-                                                    width: 1))),
+                                                    color: Colors.brown,
+                                                    width: 2))),
                                       ),
                                     ))
                     ],
